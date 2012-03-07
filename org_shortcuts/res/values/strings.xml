@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shortcuts for Calendar/Contacts</string>
+    <string name="activity_shortcut">New shortcut for Calendar/Contacts</string>
+    <string name="shortcut_dialog_title">Pick a shortcut</string>
+
+    <string-array name="shortcut_new">
+        <item>new Calendar Event</item>
+        <item>new Contact</item>
+    </string-array>
+
+</resources>
