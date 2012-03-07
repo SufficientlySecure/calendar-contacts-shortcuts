@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Shortcuts for Calendar/Contacts</string>
-    <string name="activity_shortcut">New shortcut for Calendar/Contacts</string>
+    <string name="activity_shortcut">New Calendar/Contacts Entry</string>
     <string name="shortcut_dialog_title">Pick a shortcut</string>
 
     <string-array name="shortcut_new">
