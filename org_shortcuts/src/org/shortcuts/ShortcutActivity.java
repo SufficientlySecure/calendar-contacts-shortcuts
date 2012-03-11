@@ -46,13 +46,25 @@ public class ShortcutActivity extends Activity {
             public void onClick(DialogInterface dialog, int item) {
 
                 // Intent of shortcut
-                Intent shortcutIntent = new Intent(Intent.ACTION_INSERT);
-
+                Intent shortcutIntent = null;
                 ShortcutIconResource iconResource = null;
 
                 // make shortcut based on selection
                 switch (item) {
                 case 0:
+                    // For Android < 2.2
+                    // see http://code.google.com/p/android/issues/detail?id=8483
+                    // also see
+                    // http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.1_r2/android/provider/Calendar.java/
+                    // if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
+                    // shortcutIntent = new Intent(Intent.ACTION_INSERT, Uri
+                    // .parse("content://calendar/events"));
+                    // } else {
+                    // shortcutIntent = new Intent(Intent.ACTION_INSERT, Uri
+                    // .parse("content://com.android.calendar/events"));
+                    // }
+
+                    shortcutIntent = new Intent(Intent.ACTION_INSERT);
                     shortcutIntent.setType("vnd.android.cursor.dir/event");
 
                     // icon
@@ -61,7 +73,17 @@ public class ShortcutActivity extends Activity {
 
                     break;
                 case 1:
-                    shortcutIntent.setType("vnd.android.cursor.dir/person");
+                    // For Android < 2.2
+                    // if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
+                    // shortcutIntent = new Intent(Intent.ACTION_INSERT, Uri
+                    // .parse("content://contacts/contacts"));
+                    // } else {
+                    // shortcutIntent = new Intent(Intent.ACTION_INSERT, Uri
+                    // .parse("content://com.android.contacts/contacts"));
+                    // }
+
+                    shortcutIntent = new Intent(Intent.ACTION_INSERT);
+                    shortcutIntent.setType("vnd.android.cursor.dir/contact");
 
                     // icon
                     iconResource = ShortcutIconResource.fromContext(mActivity,
@@ -69,6 +91,12 @@ public class ShortcutActivity extends Activity {
 
                     break;
                 }
+
+                // new activity
+                shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NO_HISTORY
+                        | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
                 // The result we are passing back from this activity
                 Intent intent = new Intent();
