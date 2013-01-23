@@ -6,8 +6,8 @@
     <string name="shortcut_dialog_title">Pick a shortcut</string>
 
     <string-array name="shortcut_new">
-        <item>new Calendar Event</item>
-        <item>new Contact</item>
+        <item>New Calendar Event</item>
+        <item>New Contact</item>
     </string-array>
 
 </resources>
